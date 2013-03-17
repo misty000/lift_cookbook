@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery File Upload Example</title>
+	<style type="text/css">
+		#progress {
+			width: 20em;
+			border: 1pt solid silver;
+			display: none;
+		}
+
+		#progress-bar {
+			background: green;
+			height: 1em;
+			width: 0%;
+		}
+	</style>
+</head>
+<body>
+<h1>Drag files onto this page!</h1>
+<input id="fileupload" type="file" name="files[]" data-url="/upload" multiple>
+
+<div id="progress">
+	<div id="progress-bar"></div>
+</div>
+
+<script type="text/javascript" src="/scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/js/jquery.fileupload.js"></script>
+<script type="text/javascript">
+	(function ($) {
+		$(function () {
+			$("#fileupload").fileupload({
+				dataType: 'json',
+				add: function (e, data) {
+					$('#progress-bar').css('width', '0%');
+					$('#progress').show();
+					data.submit()
+				},
+				progressall: function (e, data) {
+					var progress = parseInt(data.loaded / data.total * 100, 10) + '%';
+					$('#progress-bar').css('width', progress);
+				},
+				fail: function (e, data) {
+					alert(data.errorThrown)
+				},
+				done: function (e, data) {
+					$.each(data.files, function (index, file) {
+						$('<p/>').text(file.name).appendTo(document.body);
+					})
+					$('#progress').fadeOut();
+				}
+			})
+		})
+	})(jQuery)
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body class="lift:content_id=main">
+<div id="main" class="lift:surround?what=default;at=content">
+	<div class="lift:JsonForm">
+
+		<!--  required for JSON forms processing -->
+		<script src="/classpath/jlift.js" class="lift:tail"></script>
+
+		<!--  placeholder script required to process the form -->
+		<script id="jsonFormScript" class="lift:tail"></script>
+
+		<div id="formToJson" name="formToJson">
+			<input type="text" name="name" value="Royal Society"/>
+			<input type="text" name="motto" value="Nullius in verba"/>
+			<input type="submit" name="sb" value="go!"/>
+		</div>
+		<div id="result"></div>
+	</div>
+</div>
+</body>
+</html>
